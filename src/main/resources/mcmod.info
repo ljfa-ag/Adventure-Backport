@@ -1,0 +1,16 @@
+[
+{
+  "modid": "adventure_backport",
+  "name": "Adventure Backport",
+  "description": "Brings the CanDestroy and CanPlaceOn features from Minecraft 1.8's adventure mode back to 1.7",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ljfa"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
