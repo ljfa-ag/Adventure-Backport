@@ -22,7 +22,7 @@ public class TooltipHandler {
                 event.toolTip.add("Can break:");
                 addBlockList(tag.getTagList("CanDestroy", 8), event.toolTip);
             }
-            else if(tag.hasKey("CanPlaceOn", 9)) {
+            if(tag.hasKey("CanPlaceOn", 9)) {
                 event.toolTip.add("");
                 event.toolTip.add("Can be placed on:");
                 addBlockList(tag.getTagList("CanPlaceOn", 8), event.toolTip);
