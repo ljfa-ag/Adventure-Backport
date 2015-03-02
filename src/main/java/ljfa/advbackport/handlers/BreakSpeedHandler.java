@@ -23,7 +23,7 @@ public class BreakSpeedHandler {
         NBTTagList canDestrList = tag.getTagList("CanDestroy", 8);
         for(int i = 0; i < canDestrList.tagCount(); i++) {
             String str = canDestrList.getStringTagAt(i);
-            if(Block.blockRegistry.getObject(str) == event.block)
+            if(Block.getBlockFromName(str) == event.block)
                 return;
         }
         event.setCanceled(true);
