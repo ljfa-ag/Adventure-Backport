@@ -1,5 +1,7 @@
 package ljfa.advbackport;
 
+import net.minecraftforge.common.MinecraftForge;
+import ljfa.advbackport.handlers.BreakSpeedHandler;
 import ljfa.advbackport.util.LogHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -18,7 +20,7 @@ public class AdventureBackport {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        
+        MinecraftForge.EVENT_BUS.register(new BreakSpeedHandler());
     }
     
     @Mod.EventHandler
