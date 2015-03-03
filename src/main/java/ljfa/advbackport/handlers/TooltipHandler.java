@@ -3,9 +3,11 @@ package ljfa.advbackport.handlers;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -34,7 +36,7 @@ public class TooltipHandler {
         for(int i = 0; i < blockList.tagCount(); i++) {
             String str = blockList.getStringTagAt(i);
             Block block = Block.getBlockFromName(str);
-            String name = block != null ? block.getLocalizedName() : str;
+            String name = (block != null) ? block.getLocalizedName() : ("unknown: " + str);
             toolTip.add(EnumChatFormatting.DARK_GRAY + name);
         }
     }
