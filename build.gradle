@@ -16,7 +16,7 @@ buildscript {
 }
 
 apply plugin: 'forge'
-//apply plugin: 'curseforge'
+apply plugin: 'curseforge'
 
 version = "1.0-beta"
 group= "ljfa.advbackport" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -30,11 +30,11 @@ minecraft {
     replace "@VERSION@", project.version
 }
 
-//curse {
-//    projectId = ''
-//    apiKey = project.curseForgeApiKey
-//    releaseType = 'beta'
-//}
+curse {
+    projectId = '228312'
+    apiKey = project.curseForgeApiKey
+    releaseType = 'beta'
+}
 
 dependencies {
     // you may put jars on which you depend on in ./libs
