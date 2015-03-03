@@ -55,7 +55,7 @@ public class CanPlaceOnHandler {
                     return;
             }
         }
-        if(Config.affectInteraction || isPlaceable(stack.getItem())) 
+        if(Config.affectInteraction || stack != null && isPlaceable(stack.getItem())) 
             event.setCanceled(true);
     }
     
