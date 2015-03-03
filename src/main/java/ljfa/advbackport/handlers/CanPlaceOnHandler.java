@@ -1,5 +1,6 @@
 package ljfa.advbackport.handlers;
 
+import ljfa.advbackport.Config;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBed;
@@ -39,8 +40,8 @@ public class CanPlaceOnHandler {
      */
     @SubscribeEvent
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if(event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || !event.world.isRemote
-                || event.entityPlayer.capabilities.isCreativeMode)
+        if(event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || event.entityPlayer.capabilities.isCreativeMode
+                || (!event.world.isRemote && Config.affectInteraction))
             return;
         
         ItemStack stack = event.entityPlayer.getHeldItem();
@@ -56,9 +57,8 @@ public class CanPlaceOnHandler {
                 if(Block.getBlockFromName(str) == block)
                     return;
             }
-            event.setCanceled(true);
         }
-        else if(isPlaceable(stack.getItem())) 
+        if(Config.affectInteraction || isPlaceable(stack.getItem())) 
             event.setCanceled(true);
     }
     
