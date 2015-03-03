@@ -45,9 +45,6 @@ public class CanPlaceOnHandler {
             return;
         
         ItemStack stack = event.entityPlayer.getHeldItem();
-        if(stack == null)
-            return;
-        
         NBTTagList canPlaceList = getCanPlaceList(stack);
         if(canPlaceList != null) {
             Block block = event.world.getBlock(event.x, event.y, event.z);
