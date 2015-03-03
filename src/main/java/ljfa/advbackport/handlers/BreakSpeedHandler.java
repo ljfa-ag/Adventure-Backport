@@ -6,6 +6,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BreakSpeedHandler {
     @SubscribeEvent
@@ -15,17 +17,41 @@ public class BreakSpeedHandler {
             event.setCanceled(true);
             return;
         }
-        NBTTagCompound tag = tool.getTagCompound();
-        if(tag == null || !tag.hasKey("CanDestroy", 9)) {
-            event.setCanceled(true);
+        
+        Cache cache = event.entityPlayer.worldObj.isRemote ? clientCache : serverCache;
+        if(tool == cache.tool && event.block == cache.block) {
+            if(!cache.canDestroy)
+                event.setCanceled(true);
             return;
         }
-        NBTTagList canDestrList = tag.getTagList("CanDestroy", 8);
-        for(int i = 0; i < canDestrList.tagCount(); i++) {
-            String str = canDestrList.getStringTagAt(i);
-            if(Block.getBlockFromName(str) == event.block)
+        else {
+            cache.tool = tool;
+            cache.block = event.block;
+            
+            NBTTagCompound tag = tool.getTagCompound();
+            if(tag == null || !tag.hasKey("CanDestroy", 9)) {
+                event.setCanceled(true);
+                cache.canDestroy = false;
                 return;
+            }
+            NBTTagList canDestrList = tag.getTagList("CanDestroy", 8);
+            for(int i = 0; i < canDestrList.tagCount(); i++) {
+                String str = canDestrList.getStringTagAt(i);
+                if(Block.getBlockFromName(str) == event.block) {
+                    cache.canDestroy = true;
+                    return;
+                }
+            }
+            cache.canDestroy = false;
+            event.setCanceled(true);
         }
-        event.setCanceled(true);
     }
+    
+    private static class Cache {
+        public ItemStack tool = null;
+        public Block block = null;
+        public boolean canDestroy = false;
+    }
+    
+    private Cache serverCache = new Cache(), clientCache = new Cache();
 }
