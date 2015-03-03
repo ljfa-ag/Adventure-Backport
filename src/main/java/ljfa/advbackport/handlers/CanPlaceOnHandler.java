@@ -16,7 +16,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class PlaceHandler {
+public class CanPlaceOnHandler {
     //Server side
     @SubscribeEvent
     public void onPlace(PlaceEvent event) {

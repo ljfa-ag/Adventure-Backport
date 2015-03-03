@@ -1,8 +1,8 @@
 package ljfa.advbackport;
 
 import net.minecraftforge.common.MinecraftForge;
-import ljfa.advbackport.handlers.BreakSpeedHandler;
-import ljfa.advbackport.handlers.PlaceHandler;
+import ljfa.advbackport.handlers.CanDestroyHandler;
+import ljfa.advbackport.handlers.CanPlaceOnHandler;
 import ljfa.advbackport.handlers.TooltipHandler;
 import ljfa.advbackport.util.LogHelper;
 import cpw.mods.fml.common.Mod;
@@ -24,9 +24,9 @@ public class AdventureBackport {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         if(Config.activateCanDestroy)
-            MinecraftForge.EVENT_BUS.register(new BreakSpeedHandler());
+            MinecraftForge.EVENT_BUS.register(new CanDestroyHandler());
         if(Config.activateCanPlaceOn)
-            MinecraftForge.EVENT_BUS.register(new PlaceHandler());
+            MinecraftForge.EVENT_BUS.register(new CanPlaceOnHandler());
         
         if(event.getSide() == Side.CLIENT) {
             MinecraftForge.EVENT_BUS.register(new TooltipHandler());

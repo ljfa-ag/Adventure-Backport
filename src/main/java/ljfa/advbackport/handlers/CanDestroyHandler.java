@@ -9,7 +9,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BreakSpeedHandler {
+public class CanDestroyHandler {
     @SubscribeEvent
     public void onBreakSpeed(BreakSpeed event) {
         ItemStack tool = event.entityPlayer.getCurrentEquippedItem();
