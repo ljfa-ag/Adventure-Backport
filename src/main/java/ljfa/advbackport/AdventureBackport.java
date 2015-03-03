@@ -18,7 +18,7 @@ public class AdventureBackport {
     
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        
+        Config.loadConfig(event.getSuggestedConfigurationFile());
     }
     
     @Mod.EventHandler
