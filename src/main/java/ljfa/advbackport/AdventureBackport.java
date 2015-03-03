@@ -23,8 +23,10 @@ public class AdventureBackport {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new BreakSpeedHandler());
-        MinecraftForge.EVENT_BUS.register(new PlaceHandler());
+        if(Config.activateCanDestroy)
+            MinecraftForge.EVENT_BUS.register(new BreakSpeedHandler());
+        if(Config.activateCanPlaceOn)
+            MinecraftForge.EVENT_BUS.register(new PlaceHandler());
         
         if(event.getSide() == Side.CLIENT) {
             MinecraftForge.EVENT_BUS.register(new TooltipHandler());
