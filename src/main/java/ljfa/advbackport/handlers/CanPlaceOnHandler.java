@@ -35,7 +35,7 @@ public class CanPlaceOnHandler {
         event.setCanceled(true);
     }
     
-    /* Client Side
+    /* Client Side (unless affectInteraction is turned on)
      * Ugly implementation because BlockEvent.PlaceEvent is not being fired on the client side.
      */
     @SubscribeEvent
