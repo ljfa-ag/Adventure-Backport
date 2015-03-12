@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -63,8 +64,8 @@ public class CanPlaceOnHandler {
         if(stack == null)
             return null;
         NBTTagCompound tag = stack.getTagCompound();
-        if(tag != null && tag.hasKey("CanPlaceOn", 9))
-            return tag.getTagList("CanPlaceOn", 8);
+        if(tag != null && tag.hasKey("CanPlaceOn", Constants.NBT.TAG_LIST))
+            return tag.getTagList("CanPlaceOn", Constants.NBT.TAG_STRING);
         else
             return null;
     }

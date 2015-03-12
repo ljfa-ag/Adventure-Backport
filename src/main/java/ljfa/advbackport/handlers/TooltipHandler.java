@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -19,15 +20,15 @@ public class TooltipHandler {
     public void onTooltip(ItemTooltipEvent event) {
         NBTTagCompound tag = event.itemStack.getTagCompound();
         if(tag != null) {
-            if(tag.hasKey("CanDestroy", 9)) {
+            if(tag.hasKey("CanDestroy", Constants.NBT.TAG_LIST)) {
                 event.toolTip.add("");
                 event.toolTip.add("Can break:");
-                addBlockList(tag.getTagList("CanDestroy", 8), event.toolTip);
+                addBlockList(tag.getTagList("CanDestroy", Constants.NBT.TAG_STRING), event.toolTip);
             }
-            if(tag.hasKey("CanPlaceOn", 9)) {
+            if(tag.hasKey("CanPlaceOn", Constants.NBT.TAG_LIST)) {
                 event.toolTip.add("");
                 event.toolTip.add("Can be placed on:");
-                addBlockList(tag.getTagList("CanPlaceOn", 8), event.toolTip);
+                addBlockList(tag.getTagList("CanPlaceOn", Constants.NBT.TAG_STRING), event.toolTip);
             }
         }
     }

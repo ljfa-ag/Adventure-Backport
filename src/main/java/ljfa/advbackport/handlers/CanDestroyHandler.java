@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -29,12 +30,12 @@ public class CanDestroyHandler {
             cache.block = event.block;
             
             NBTTagCompound tag = tool.getTagCompound();
-            if(tag == null || !tag.hasKey("CanDestroy", 9)) {
+            if(tag == null || !tag.hasKey("CanDestroy", Constants.NBT.TAG_LIST)) {
                 event.setCanceled(true);
                 cache.canDestroy = false;
                 return;
             }
-            NBTTagList canDestrList = tag.getTagList("CanDestroy", 8);
+            NBTTagList canDestrList = tag.getTagList("CanDestroy", Constants.NBT.TAG_STRING);
             for(int i = 0; i < canDestrList.tagCount(); i++) {
                 String str = canDestrList.getStringTagAt(i);
                 if(Block.getBlockFromName(str) == event.block) {
