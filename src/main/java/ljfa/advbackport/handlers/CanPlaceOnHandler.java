@@ -2,6 +2,7 @@ package ljfa.advbackport.handlers;
 
 import ljfa.advbackport.Config;
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBed;
 import net.minecraft.item.ItemBlock;
@@ -23,6 +24,9 @@ public class CanPlaceOnHandler {
     @SubscribeEvent
     public void onPlace(PlaceEvent event) {
         if(event.player.capabilities.isCreativeMode)
+            return;
+        //Bone meal is behaving derpy
+        if(event.itemInHand.getItem() == Items.dye && event.itemInHand.getItemDamage() == 15)
             return;
         
         NBTTagList canPlaceList = getCanPlaceList(event.itemInHand);
