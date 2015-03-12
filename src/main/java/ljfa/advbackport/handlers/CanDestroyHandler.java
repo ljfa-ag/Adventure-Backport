@@ -7,8 +7,17 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class CanDestroyHandler {
+    
+    public CanDestroyHandler(Side side) {
+        serverCache = new Cache();
+        if(side == Side.CLIENT)
+            clientCache = new Cache();
+    }
+    
     @SubscribeEvent
     public void onBreakSpeed(BreakSpeed event) {
         ItemStack tool = event.entityPlayer.getCurrentEquippedItem();
@@ -52,5 +61,7 @@ public class CanDestroyHandler {
         public boolean canDestroy = false;
     }
     
-    private Cache serverCache = new Cache(), clientCache = new Cache();
+    private Cache serverCache;
+    @SideOnly(Side.CLIENT)
+    private Cache clientCache;
 }
