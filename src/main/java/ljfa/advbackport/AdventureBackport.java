@@ -1,13 +1,11 @@
 package ljfa.advbackport;
 
-import net.minecraftforge.common.MinecraftForge;
 import ljfa.advbackport.handlers.CanDestroyHandler;
 import ljfa.advbackport.handlers.CanPlaceOnHandler;
 import ljfa.advbackport.handlers.TooltipHandler;
-import ljfa.advbackport.util.LogHelper;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 
@@ -33,8 +31,8 @@ public class AdventureBackport {
         }
     }
     
-    @Mod.EventHandler
+    /*@Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         
-    }
+    }*/
 }
