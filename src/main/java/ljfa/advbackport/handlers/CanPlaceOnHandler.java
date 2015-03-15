@@ -25,9 +25,15 @@ public class CanPlaceOnHandler {
     public void onPlace(PlaceEvent event) {
         if(event.player.capabilities.isCreativeMode)
             return;
+        
+        if(event.itemInHand == null) {
+            event.setCanceled(true);
+            return;
+        }
+        
         //Bone meal is behaving derpy
         if((event.itemInHand.getItem() == Items.dye && event.itemInHand.getItemDamage() == 15)
-                || (event.itemInHand != null && Config.alwaysPlaceable.contains(event.itemInHand.getItem())))
+                || Config.alwaysPlaceable.contains(event.itemInHand.getItem()))
             return;
         
         NBTTagList canPlaceList = getCanPlaceList(event.itemInHand);
