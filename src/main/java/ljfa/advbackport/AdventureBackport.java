@@ -23,6 +23,7 @@ public class AdventureBackport {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        Config.createSets();
         if(Config.activateCanDestroy)
             MinecraftForge.EVENT_BUS.register(new CanDestroyHandler(event.getSide()));
         if(Config.activateCanPlaceOn)

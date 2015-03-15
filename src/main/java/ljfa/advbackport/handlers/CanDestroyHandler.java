@@ -1,5 +1,6 @@
 package ljfa.advbackport.handlers;
 
+import ljfa.advbackport.Config;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,6 +21,9 @@ public class CanDestroyHandler {
     
     @SubscribeEvent
     public void onBreakSpeed(BreakSpeed event) {
+        if(Config.alwaysBreakable.contains(event.block))
+            return;
+        
         ItemStack tool = event.entityPlayer.getCurrentEquippedItem();
         if(tool == null) {
             event.setCanceled(true);

@@ -26,7 +26,8 @@ public class CanPlaceOnHandler {
         if(event.player.capabilities.isCreativeMode)
             return;
         //Bone meal is behaving derpy
-        if(event.itemInHand.getItem() == Items.dye && event.itemInHand.getItemDamage() == 15)
+        if((event.itemInHand.getItem() == Items.dye && event.itemInHand.getItemDamage() == 15)
+                || (event.itemInHand != null && Config.alwaysPlaceable.contains(event.itemInHand.getItem())))
             return;
         
         NBTTagList canPlaceList = getCanPlaceList(event.itemInHand);
@@ -48,8 +49,10 @@ public class CanPlaceOnHandler {
         if(event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || event.entityPlayer.capabilities.isCreativeMode
                 || (!event.world.isRemote && Config.affectInteraction))
             return;
-        
         ItemStack stack = event.entityPlayer.getHeldItem();
+        if(stack == null || Config.alwaysPlaceable.contains(stack.getItem()))
+            return;
+        
         NBTTagList canPlaceList = getCanPlaceList(stack);
         if(canPlaceList != null) {
             Block block = event.world.getBlock(event.x, event.y, event.z);
@@ -60,7 +63,7 @@ public class CanPlaceOnHandler {
                     return;
             }
         }
-        if(Config.affectInteraction || stack != null && isPlaceable(stack.getItem())) 
+        if(Config.affectInteraction || isPlaceable(stack.getItem())) 
             event.setCanceled(true);
     }
     
