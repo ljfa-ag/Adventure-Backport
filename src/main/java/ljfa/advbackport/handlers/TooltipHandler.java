@@ -38,7 +38,7 @@ public class TooltipHandler {
         for(int i = 0; i < blockList.tagCount(); i++) {
             String str = blockList.getStringTagAt(i);
             Block block = Block.getBlockFromName(str);
-            String name = (block != null) ? getName(block) : ("unknown: " + str);
+            String name = (block != null) ? getName(block) : (EnumChatFormatting.ITALIC + "unknown: " + str);
             toolTip.add(EnumChatFormatting.DARK_GRAY + name);
         }
     }
