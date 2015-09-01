@@ -1,18 +1,19 @@
 package ljfa.advbackport;
 
+import static ljfa.advbackport.AdventureBackport.logger;
+
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ljfa.advbackport.exception.InvalidConfigValueException;
-import ljfa.advbackport.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class Config {
     public static Configuration conf;
@@ -56,7 +57,7 @@ public class Config {
                 throw new InvalidConfigValueException("Invalid always breakable list entry: " + name);
             else {
                 alwaysBreakable.add(block);
-                LogHelper.debug("Block always breakable: %s", name);
+                logger.debug("Block always breakable: {}", name);
             }
         }
         
@@ -67,7 +68,7 @@ public class Config {
                 throw new InvalidConfigValueException("Invalid always placeable list entry: " + name);
             else {
                 alwaysPlaceable.add(item);
-                LogHelper.debug("Item always placeable: %s", name);
+                logger.debug("Item always placeable: {}", name);
             }
         }
     }

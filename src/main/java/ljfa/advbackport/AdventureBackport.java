@@ -1,5 +1,8 @@
 package ljfa.advbackport;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
@@ -15,6 +18,8 @@ import net.minecraftforge.common.MinecraftForge;
 public class AdventureBackport {
     @Mod.Instance(Reference.MODID)
     public static AdventureBackport instance;
+    
+    public static final Logger logger = LogManager.getLogger(Reference.MODNAME);
     
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
