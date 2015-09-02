@@ -1,15 +1,15 @@
 package ljfa.advbackport;
 
-import ljfa.advbackport.handlers.CanDestroyHandler;
-import ljfa.advbackport.handlers.CanPlaceOnHandler;
-import ljfa.advbackport.handlers.TooltipHandler;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
+import ljfa.advbackport.handlers.CanDestroyHandler;
+import ljfa.advbackport.handlers.CanPlaceOnHandler;
+import ljfa.advbackport.handlers.TooltipHandler;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION)
 public class AdventureBackport {
@@ -25,7 +25,7 @@ public class AdventureBackport {
     public void init(FMLInitializationEvent event) {
         Config.createSets();
         if(Config.activateCanDestroy)
-            MinecraftForge.EVENT_BUS.register(new CanDestroyHandler(event.getSide()));
+            MinecraftForge.EVENT_BUS.register(new CanDestroyHandler());
         if(Config.activateCanPlaceOn)
             MinecraftForge.EVENT_BUS.register(new CanPlaceOnHandler());
         

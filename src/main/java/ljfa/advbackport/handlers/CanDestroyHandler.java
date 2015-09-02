@@ -1,5 +1,6 @@
 package ljfa.advbackport.handlers;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ljfa.advbackport.Config;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -7,18 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class CanDestroyHandler {
-    
-    public CanDestroyHandler(Side side) {
-        serverCache = new Cache();
-        if(side == Side.CLIENT)
-            clientCache = new Cache();
-    }
-    
     @SubscribeEvent
     public void onBreakSpeed(BreakSpeed event) {
         if(Config.alwaysBreakable.contains(event.block))
@@ -30,7 +21,7 @@ public class CanDestroyHandler {
             return;
         }
         
-        Cache cache = event.entityPlayer.worldObj.isRemote ? clientCache : serverCache;
+        Cache cache = tcache.get();
         if(tool == cache.tool && event.block == cache.block) {
             if(!cache.canDestroy)
                 event.setCanceled(true);
@@ -65,7 +56,10 @@ public class CanDestroyHandler {
         public boolean canDestroy = false;
     }
     
-    private Cache serverCache;
-    @SideOnly(Side.CLIENT)
-    private Cache clientCache;
+    private ThreadLocal<Cache> tcache = new ThreadLocal<Cache>() {
+        @Override
+        protected Cache initialValue() {
+            return new Cache();
+        };
+    };
 }
