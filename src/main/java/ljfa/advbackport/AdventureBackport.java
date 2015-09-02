@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import ljfa.advbackport.handlers.CanDestroyHandler;
@@ -28,7 +29,6 @@ public class AdventureBackport {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Config.createSets();
         if(Config.activateCanDestroy)
             MinecraftForge.EVENT_BUS.register(new CanDestroyHandler());
         if(Config.activateCanPlaceOn)
@@ -41,10 +41,10 @@ public class AdventureBackport {
         addVersionChecker();
     }
     
-    /*@Mod.EventHandler
+    @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        
-    }*/
+        Config.createSets();
+    }
     
     public void addVersionChecker() {
         NBTTagCompound tag = new NBTTagCompound();

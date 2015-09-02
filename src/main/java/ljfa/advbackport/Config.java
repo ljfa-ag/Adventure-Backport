@@ -23,10 +23,8 @@ public class Config {
     public static boolean activateCanDestroy;
     public static boolean activateCanPlaceOn;
     public static boolean affectInteraction;
-    public static String[] alwaysBreakableArray;
-    public static Set<Block> alwaysBreakable = null;
-    public static String[] alwaysPlaceableArray;
-    public static Set<Item> alwaysPlaceable = null;
+    public static Set<Block> alwaysBreakable;
+    public static Set<Item> alwaysPlaceable;
 
     public static void loadConfig(File file) {
         if(conf == null)
@@ -42,14 +40,10 @@ public class Config {
         activateCanDestroy = conf.get(CAT_GENERAL, "Activate CanDestroy", true, "Blocks cannot be broken unless the tool used has an appropriate CanDestroy tag").setRequiresMcRestart(true).getBoolean();
         activateCanPlaceOn = conf.get(CAT_GENERAL, "Activate CanPlaceOn", true, "Blocks cannot be placed unless they have an appropriate CanPlaceOn tag").setRequiresMcRestart(true).getBoolean();
         affectInteraction = conf.get(CAT_GENERAL, "CanPlaceOn also affects interaction", false, "When activated, the player can also not interact with blocks (e.g. pushing a button) unless they use an item with appropriate CanPlaceOn").getBoolean();
-        alwaysBreakableArray = conf.get(CAT_GENERAL, "Always breakable", new String[0], "List of blocks that can always be broken").getStringList();
-        alwaysPlaceableArray = conf.get(CAT_GENERAL, "Always placeable", new String[0], "List of items that can be placed anywhere").getStringList();
-        //----------------
-        if(conf.hasChanged())
-            conf.save();
     }
     
     public static void createSets() {
+        String[] alwaysBreakableArray = conf.get(CAT_GENERAL, "Always breakable", new String[0], "List of blocks that can always be broken").getStringList();
         alwaysBreakable = new HashSet<Block>();
         for(String name: alwaysBreakableArray) {
             Block block = (Block)Block.blockRegistry.getObject(name);
@@ -60,7 +54,8 @@ public class Config {
                 logger.debug("Block always breakable: {}", name);
             }
         }
-        
+        //----------------
+        String[] alwaysPlaceableArray = conf.get(CAT_GENERAL, "Always placeable", new String[0], "List of items that can be placed anywhere").getStringList();
         alwaysPlaceable = new HashSet<Item>();
         for(String name: alwaysPlaceableArray) {
             Item item = (Item)Item.itemRegistry.getObject(name);
@@ -71,6 +66,9 @@ public class Config {
                 logger.debug("Item always placeable: {}", name);
             }
         }
+        //----------------
+        if(conf.hasChanged())
+            conf.save();
     }
 
     /** Reloads the config values upon change */
