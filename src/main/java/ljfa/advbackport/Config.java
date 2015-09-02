@@ -3,8 +3,9 @@ package ljfa.advbackport;
 import static ljfa.advbackport.AdventureBackport.logger;
 
 import java.io.File;
-import java.util.HashSet;
 import java.util.Set;
+
+import com.google.common.collect.ImmutableSet;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -44,28 +45,30 @@ public class Config {
     
     public static void createSets() {
         String[] alwaysBreakableArray = conf.get(CAT_GENERAL, "Always breakable", new String[0], "List of blocks that can always be broken").getStringList();
-        alwaysBreakable = new HashSet<Block>();
+        ImmutableSet.Builder<Block> abBuilder = ImmutableSet.builder();
         for(String name: alwaysBreakableArray) {
             Block block = (Block)Block.blockRegistry.getObject(name);
             if(block == Blocks.air || block == null)
                 throw new InvalidConfigValueException("Invalid always breakable list entry: " + name);
             else {
-                alwaysBreakable.add(block);
+                abBuilder.add(block);
                 logger.debug("Block always breakable: {}", name);
             }
         }
+        alwaysBreakable = abBuilder.build();
         //----------------
         String[] alwaysPlaceableArray = conf.get(CAT_GENERAL, "Always placeable", new String[0], "List of items that can be placed anywhere").getStringList();
-        alwaysPlaceable = new HashSet<Item>();
+        ImmutableSet.Builder<Item> apBuilder = ImmutableSet.builder();
         for(String name: alwaysPlaceableArray) {
             Item item = (Item)Item.itemRegistry.getObject(name);
             if(item == null)
                 throw new InvalidConfigValueException("Invalid always placeable list entry: " + name);
             else {
-                alwaysPlaceable.add(item);
+                apBuilder.add(item);
                 logger.debug("Item always placeable: {}", name);
             }
         }
+        alwaysPlaceable = apBuilder.build();
         //----------------
         if(conf.hasChanged())
             conf.save();
