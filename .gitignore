@@ -3,6 +3,8 @@
 /bin
 /build
 /eclipse
+/run
 /.classpath
 /.project
+/.cache-main
 /libs

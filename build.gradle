@@ -19,12 +19,12 @@ apply plugin: 'forge'
 apply plugin: 'curseforge'
 
 version = "1.1.2"
-group= "ljfa.advbackport" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "ljfa.advbackport"
 archivesBaseName = "adventure_backport"
 
 minecraft {
     version = "1.7.10-10.13.4.1448-1.7.10"
-    runDir = "eclipse"
+    runDir = "run"
     
     replaceIn "Reference.java"
     replace "@VERSION@", project.version
@@ -33,7 +33,7 @@ minecraft {
 curse {
     projectId = '228312'
     apiKey = project.curseForgeApiKey
-    releaseType = 'beta'
+    releaseType = 'release'
 }
 
 dependencies {
