@@ -15,7 +15,8 @@ import de.ljfa.advbackport.handlers.TooltipHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION)
+@Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION,
+        dependencies = "required-after:adventure_backport_core", acceptedMinecraftVersions = "1.7.10")
 public class AdventureBackport {
     @Mod.Instance(Reference.MODID)
     public static AdventureBackport instance;
