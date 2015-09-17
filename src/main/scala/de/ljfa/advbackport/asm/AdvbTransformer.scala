@@ -20,7 +20,7 @@ class AdvbTransformer extends IClassTransformer {
     private val logger = LogManager.getLogger("Adventure Backport Core")
     
     override def transform(name: String, transformedName: String, bytes: Array[Byte]): Array[Byte] = {
-        transformedName match {
+        name match {
             case "net.minecraft.entity.player.EntityPlayer" => transformEntityPlayer(bytes, false)
             case "yz" => transformEntityPlayer(bytes, true)
             case _ => bytes
