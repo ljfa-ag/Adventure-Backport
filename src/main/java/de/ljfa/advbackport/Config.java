@@ -1,6 +1,6 @@
-package ljfa.advbackport;
+package de.ljfa.advbackport;
 
-import static ljfa.advbackport.AdventureBackport.logger;
+import static de.ljfa.advbackport.AdventureBackport.logger;
 
 import java.io.File;
 import java.util.Set;
@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableSet;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import ljfa.advbackport.exception.InvalidConfigValueException;
+import de.ljfa.advbackport.exception.InvalidConfigValueException;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;

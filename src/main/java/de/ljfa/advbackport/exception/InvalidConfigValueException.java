@@ -1,4 +1,4 @@
-package ljfa.advbackport.exception;
+package de.ljfa.advbackport.exception;
 
 public class InvalidConfigValueException extends RuntimeException {
     public InvalidConfigValueException() {

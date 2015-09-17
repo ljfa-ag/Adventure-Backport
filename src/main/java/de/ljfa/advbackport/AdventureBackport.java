@@ -1,4 +1,4 @@
-package ljfa.advbackport;
+package de.ljfa.advbackport;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,13 +9,14 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
-import ljfa.advbackport.handlers.CanDestroyHandler;
-import ljfa.advbackport.handlers.CanPlaceOnHandler;
-import ljfa.advbackport.handlers.TooltipHandler;
+import de.ljfa.advbackport.handlers.CanDestroyHandler;
+import de.ljfa.advbackport.handlers.CanPlaceOnHandler;
+import de.ljfa.advbackport.handlers.TooltipHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION)
+@Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION,
+        dependencies = "required-after:adventure_backport_core", acceptedMinecraftVersions = "1.7.10")
 public class AdventureBackport {
     @Mod.Instance(Reference.MODID)
     public static AdventureBackport instance;
@@ -29,8 +30,8 @@ public class AdventureBackport {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        if(Config.activateCanDestroy)
-            MinecraftForge.EVENT_BUS.register(new CanDestroyHandler());
+        /*if(Config.activateCanDestroy)
+            MinecraftForge.EVENT_BUS.register(new CanDestroyHandler());*/
         if(Config.activateCanPlaceOn)
             MinecraftForge.EVENT_BUS.register(new CanPlaceOnHandler());
         
