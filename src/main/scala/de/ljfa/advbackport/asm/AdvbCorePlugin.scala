@@ -29,7 +29,7 @@ class AdvbCorePlugin extends DummyModContainer({
 }) with IFMLLoadingPlugin {
     override def registerBus(bus: EventBus, controller: LoadController) = true
     
-    override def getASMTransformerClass = Array()
+    override def getASMTransformerClass = Array(classOf[AdvbTransformer].getName)
     
     override def getAccessTransformerClass = null
     
