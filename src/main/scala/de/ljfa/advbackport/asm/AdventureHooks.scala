@@ -14,25 +14,19 @@ object AdventureHooks {
     def isToolAdventureModeExempt(player: EntityPlayer, x: Int, y: Int, z: Int): Boolean = {
         if(player.capabilities.allowEdit)
             return true
+        
         val block = player.worldObj.getBlock(x, y, z)
         if(Config.alwaysBreakable contains block)
             return true
         
         val tool = player.getCurrentEquippedItem
         val cache = tcache.get
-        cache match {
-            case Cache(`tool`, `block`, canDestroy: Boolean) => { //hit
-                logger.info("Cache hit")
-                canDestroy
-            }
-            case _ => { //miss
-                logger.info("Cache miss")
-                cache.tool = tool
-                cache.block = block
-                cache.canDestroy = computeCanDestroy(tool, block)
-                cache.canDestroy
-            }
+        if((tool ne cache.tool) || (block ne cache.block)) {
+            cache.tool = tool
+            cache.block = block
+            cache.canDestroy = computeCanDestroy(tool, block)
         }
+        cache.canDestroy
     }
     
     private def computeCanDestroy(tool: ItemStack, block: Block): Boolean = {
