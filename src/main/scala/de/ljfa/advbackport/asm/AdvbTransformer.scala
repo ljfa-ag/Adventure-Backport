@@ -46,7 +46,7 @@ class AdvbTransformer extends IClassTransformer {
                 toInject.add(new VarInsnNode(Opcodes.ILOAD, 1)) //x
                 toInject.add(new VarInsnNode(Opcodes.ILOAD, 2)) //y
                 toInject.add(new VarInsnNode(Opcodes.ILOAD, 3)) //z
-                toInject.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(AdventureHooks.getClass),
+                toInject.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Type.getInternalName(classOf[AdventureHooks]),
                         "isToolAdventureModeExempt", "(Lnet/minecraft/entity/player/EntityPlayer;III)Z", false))
                 toInject.add(new InsnNode(Opcodes.IRETURN))
                 
