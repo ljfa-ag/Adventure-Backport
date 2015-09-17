@@ -60,6 +60,6 @@ public class CanDestroyHandler {
         @Override
         protected Cache initialValue() {
             return new Cache();
-        };
+        }
     };
 }
