@@ -1,7 +1,7 @@
-package ljfa.advbackport.handlers;
+package de.ljfa.advbackport.handlers;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import ljfa.advbackport.Config;
+import de.ljfa.advbackport.Config;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

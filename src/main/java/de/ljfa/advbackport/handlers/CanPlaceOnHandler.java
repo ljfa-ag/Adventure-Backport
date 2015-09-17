@@ -1,6 +1,5 @@
-package ljfa.advbackport.handlers;
+package de.ljfa.advbackport.handlers;
 
-import ljfa.advbackport.Config;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -18,6 +17,7 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import de.ljfa.advbackport.Config;
 
 public class CanPlaceOnHandler {
     //Server side

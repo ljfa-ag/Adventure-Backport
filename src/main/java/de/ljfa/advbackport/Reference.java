@@ -1,4 +1,4 @@
-package ljfa.advbackport;
+package de.ljfa.advbackport;
 
 public class Reference {
     public static final String MODID = "adventure_backport";

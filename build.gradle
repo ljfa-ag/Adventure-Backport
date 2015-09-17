@@ -20,7 +20,7 @@ apply plugin: 'forge'
 apply plugin: 'curseforge'
 
 version = "1.1.2"
-group= "ljfa.advbackport"
+group= "de.ljfa.advbackport"
 archivesBaseName = "adventure_backport"
 
 minecraft {

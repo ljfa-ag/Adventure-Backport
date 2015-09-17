@@ -1,4 +1,4 @@
-package ljfa.advbackport;
+package de.ljfa.advbackport;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,9 +9,9 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
-import ljfa.advbackport.handlers.CanDestroyHandler;
-import ljfa.advbackport.handlers.CanPlaceOnHandler;
-import ljfa.advbackport.handlers.TooltipHandler;
+import de.ljfa.advbackport.handlers.CanDestroyHandler;
+import de.ljfa.advbackport.handlers.CanPlaceOnHandler;
+import de.ljfa.advbackport.handlers.TooltipHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
