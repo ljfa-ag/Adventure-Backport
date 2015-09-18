@@ -61,14 +61,14 @@ public class CanPlaceOnHandler {
                 || ItemLogic.canPlaceOn(stack, event.world.getBlock(event.x, event.y, event.z)))
             return;
         
-        if(Config.affectInteraction || isPlaceable(stack.getItem())) 
+        if(Config.affectInteraction || isPlaceable(stack.getItem(), stack.getItemDamage())) 
             event.setCanceled(true);
     }
     
     /** This is a heuristic function which should only be used at the client side!
      * It only covers ItemBlocks and vanilla placeable items.
      */
-    private boolean isPlaceable(Item item) {
+    private boolean isPlaceable(Item item, int meta) {
         return item instanceof ItemBlock
             || item instanceof ItemReed
             || item instanceof ItemBed
@@ -76,6 +76,7 @@ public class CanPlaceOnHandler {
             || item instanceof IPlantable
             || item instanceof ItemDoor
             || item instanceof ItemSign
-            || item instanceof ItemSkull;
+            || item instanceof ItemSkull
+            || (item == Items.dye && meta == 3); //Cocoa beans
     }
 }
