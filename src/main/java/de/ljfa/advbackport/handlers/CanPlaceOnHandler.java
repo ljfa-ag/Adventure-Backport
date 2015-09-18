@@ -8,6 +8,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBed;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemRedstone;
 import net.minecraft.item.ItemReed;
 import net.minecraft.item.ItemSign;
@@ -73,6 +74,7 @@ public class CanPlaceOnHandler {
             || item instanceof ItemBed
             || item instanceof ItemRedstone
             || item instanceof IPlantable
+            || item instanceof ItemDoor
             || item instanceof ItemSign
             || item instanceof ItemSkull;
     }
