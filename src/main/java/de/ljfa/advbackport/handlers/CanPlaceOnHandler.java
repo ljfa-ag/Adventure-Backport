@@ -50,7 +50,13 @@ public class CanPlaceOnHandler {
             return;
         
         ItemStack stack = event.entityPlayer.getHeldItem();
-        if(stack == null || Config.alwaysPlaceable.contains(stack.getItem())
+        if(stack == null) {
+            if(Config.affectInteraction)
+                event.setCanceled(true);
+            return;
+        }
+        
+        if(Config.alwaysPlaceable.contains(stack.getItem())
                 || ItemLogic.canPlaceOn(stack, event.world.getBlock(event.x, event.y, event.z)))
             return;
         
