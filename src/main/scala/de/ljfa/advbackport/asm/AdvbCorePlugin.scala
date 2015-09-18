@@ -34,7 +34,12 @@ class AdvbCorePlugin extends DummyModContainer({
     
     override def registerBus(bus: EventBus, controller: LoadController) = true
     
-    override def getASMTransformerClass = Array(classOf[AdvbTransformer].getName)
+    override def getASMTransformerClass = {
+        if(Config.activateCanDestroy)
+            Array(classOf[AdvbTransformer].getName)
+        else
+            Array()
+    }
     
     override def getAccessTransformerClass = null
     
