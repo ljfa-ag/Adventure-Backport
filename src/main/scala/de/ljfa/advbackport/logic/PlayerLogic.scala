@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.world.WorldSettings.GameType
 import cpw.mods.fml.relauncher.Side
 import java.lang.reflect.Field
+import cpw.mods.fml.relauncher.ReflectionHelper
 
 object PlayerLogic {
     def getGameType(player: EntityPlayer): GameType = {
@@ -19,9 +20,5 @@ object PlayerLogic {
     }
     
     @SideOnly(Side.CLIENT)
-    lazy val gameTypeField: Field = {
-        val f = classOf[PlayerControllerMP].getDeclaredField("currentGameType")
-        f.setAccessible(true)
-        f
-    }
+    lazy val gameTypeField: Field = ReflectionHelper.findField(classOf[PlayerControllerMP], "field_78779_k", "currentGameType")
 }
