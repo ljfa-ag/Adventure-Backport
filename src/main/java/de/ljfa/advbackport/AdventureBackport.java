@@ -9,7 +9,6 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
-import de.ljfa.advbackport.handlers.CanDestroyHandler;
 import de.ljfa.advbackport.handlers.CanPlaceOnHandler;
 import de.ljfa.advbackport.handlers.TooltipHandler;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,8 +29,6 @@ public class AdventureBackport {
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        /*if(Config.activateCanDestroy)
-            MinecraftForge.EVENT_BUS.register(new CanDestroyHandler());*/
         if(Config.activateCanPlaceOn)
             MinecraftForge.EVENT_BUS.register(new CanPlaceOnHandler());
         
