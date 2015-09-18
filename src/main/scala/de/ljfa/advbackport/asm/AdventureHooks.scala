@@ -18,21 +18,6 @@ object AdventureHooks {
             return true
         
         val tool = player.getCurrentEquippedItem
-        if(tool == null)
-            return false;
-        
-        val cache = tcache.get
-        if((tool ne cache.tool) || (block ne cache.block)) {
-            cache.tool = tool
-            cache.block = block
-            cache.canDestroy = ItemLogic.canDestroy(tool, block)
-        }
-        cache.canDestroy
-    }
-    
-    private case class Cache(var tool: ItemStack, var block: Block, var canDestroy: Boolean)
-    
-    private object tcache extends ThreadLocal[Cache] {
-        override def initialValue = Cache(null, null, false)
+        tool != null && ItemLogic.canDestroy(tool, block)
     }
 }
