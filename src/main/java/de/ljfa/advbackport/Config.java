@@ -8,7 +8,6 @@ import java.util.Set;
 import com.google.common.collect.ImmutableSet;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import de.ljfa.advbackport.exception.InvalidConfigValueException;
 import net.minecraft.block.Block;
@@ -33,8 +32,6 @@ public class Config {
 
         conf.load();
         loadValues();
-
-        FMLCommonHandler.instance().bus().register(new ChangeHandler());
     }
 
     public static void loadValues() {

@@ -3,13 +3,13 @@ package de.ljfa.advbackport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
-import de.ljfa.advbackport.handlers.CanDestroyHandler;
 import de.ljfa.advbackport.handlers.CanPlaceOnHandler;
 import de.ljfa.advbackport.handlers.TooltipHandler;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,15 +23,13 @@ public class AdventureBackport {
     
     public static final Logger logger = LogManager.getLogger(Reference.MODNAME);
     
-    @Mod.EventHandler
+    /*@Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        Config.loadConfig(event.getSuggestedConfigurationFile());
-    }
+        
+    }*/
     
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        /*if(Config.activateCanDestroy)
-            MinecraftForge.EVENT_BUS.register(new CanDestroyHandler());*/
         if(Config.activateCanPlaceOn)
             MinecraftForge.EVENT_BUS.register(new CanPlaceOnHandler());
         
@@ -45,6 +43,7 @@ public class AdventureBackport {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         Config.createSets();
+        FMLCommonHandler.instance().bus().register(new Config.ChangeHandler());
     }
     
     public void addVersionChecker() {
