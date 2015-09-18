@@ -3,6 +3,7 @@ package de.ljfa.advbackport.handlers;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import de.ljfa.advbackport.Config;
 import de.ljfa.advbackport.logic.ItemLogic;
+import de.ljfa.advbackport.logic.PlayerLogic;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBed;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemReed;
 import net.minecraft.item.ItemSign;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.WorldSettings.GameType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
@@ -20,7 +22,7 @@ public class CanPlaceOnHandler {
     //Server side
     @SubscribeEvent
     public void onPlace(PlaceEvent event) {
-        if(event.player.capabilities.isCreativeMode)
+        if(PlayerLogic.getGameType(event.player) != GameType.ADVENTURE)
             return;
         
         if(event.itemInHand == null) {
@@ -42,7 +44,8 @@ public class CanPlaceOnHandler {
      */
     @SubscribeEvent
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if(event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || event.entityPlayer.capabilities.isCreativeMode
+        if(event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
+                || PlayerLogic.getGameType(event.entityPlayer) != GameType.ADVENTURE
                 || (!event.world.isRemote && Config.affectInteraction))
             return;
         
