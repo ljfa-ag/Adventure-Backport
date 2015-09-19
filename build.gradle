@@ -23,6 +23,9 @@ version = "2.0-alpha"
 group= "de.ljfa.advbackport"
 archivesBaseName = "adventure_backport"
 
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
 jar {
     manifest {
         attributes 'FMLCorePlugin': 'de.ljfa.advbackport.asm.AdvbCorePlugin'
