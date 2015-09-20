@@ -30,20 +30,4 @@ object ItemLogic {
             case _ => false
         }
     }
-    
-    /**
-     * This is a heuristic function that can give false negatives!
-     * Only use this on the client side!
-     */
-    def isPlaceable(item: Item, meta: Int): Boolean = {
-        item.isInstanceOf[ItemBlock] ||
-        item.isInstanceOf[ItemReed] ||
-        item.isInstanceOf[ItemBed] ||
-        item.isInstanceOf[ItemRedstone] ||
-        item.isInstanceOf[IPlantable] ||
-        item.isInstanceOf[ItemDoor] ||
-        item.isInstanceOf[ItemSign] ||
-        item.isInstanceOf[ItemSkull] ||
-        ((item eq Items.dye) && meta == 3) //Cocoa beans
-    }
 }

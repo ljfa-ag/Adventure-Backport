@@ -8,7 +8,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 
 public class CanPlaceOnHandler {
-    //Server side
+    //Server side (unfortunately there is no satisfying solution for the client side)
     @SubscribeEvent
     public void onPlace(PlaceEvent event) {
         if(PlayerLogic.getGameType(event.player) != GameType.ADVENTURE)
@@ -18,16 +18,14 @@ public class CanPlaceOnHandler {
             event.setCanceled(true);
     }
     
-    //Client Side (unless affectInteraction is turned on)
-    //Ugly implementation because BlockEvent.PlaceEvent is not being fired on the client side.
     @SubscribeEvent
     public void onPlayerInteract(PlayerInteractEvent event) {
         if(event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
-                || PlayerLogic.getGameType(event.entityPlayer) != GameType.ADVENTURE
-                || (!event.world.isRemote && Config.affectInteraction))
+                || PlayerLogic.getGameType(event.entityPlayer) != GameType.ADVENTURE)
             return;
         
-        if(!PlayerLogic.canRightClickOn(event.entityPlayer, event.entityPlayer.getHeldItem(), event.x, event.y, event.z))
+        if(Config.affectInteraction 
+                && !PlayerLogic.canRightClickOn(event.entityPlayer, event.entityPlayer.getHeldItem(), event.x, event.y, event.z))
             event.setCanceled(true);
     }
 }

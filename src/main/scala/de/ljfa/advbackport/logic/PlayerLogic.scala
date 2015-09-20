@@ -1,6 +1,7 @@
 package de.ljfa.advbackport.logic
 
 import java.lang.reflect.Field
+
 import cpw.mods.fml.relauncher.ReflectionHelper
 import cpw.mods.fml.relauncher.SideOnly
 import de.ljfa.advbackport.Config
@@ -43,17 +44,10 @@ object PlayerLogic {
             ItemLogic.canPlaceOn(stack, against)
     }
     
-    /**
-     * Checks whether the player is allowed to right-click on the block with the stack in their hand.
-     * However, this function can give false negatives unless Config.affectInteraction is turned on!
-     * So in this case is must only be used on the client side!
-     */
     def canRightClickOn(player: EntityPlayer, stack: ItemStack, x: Int, y: Int, z: Int): Boolean = {
         if(stack == null)
-            !Config.affectInteraction
+            false
         else if(Config.alwaysPlaceable contains stack.getItem)
-            true
-        else if(!Config.affectInteraction && !ItemLogic.isPlaceable(stack.getItem, stack.getItemDamage))
             true
         else
             ItemLogic.canPlaceOn(stack, player.worldObj.getBlock(x, y, z))
