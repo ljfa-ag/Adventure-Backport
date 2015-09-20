@@ -8,7 +8,7 @@ object ItemLogic {
     def canDestroy(tool: ItemStack, block: Block): Boolean = checkList("CanDestroy", tool, block)
     def canPlaceOn(stack: ItemStack, block: Block): Boolean = checkList("CanPlaceOn", stack, block)
     
-    private def checkList(listName: String, stack: ItemStack, block: Block): Boolean = {
+    def checkList(listName: String, stack: ItemStack, block: Block): Boolean = {
         stack.getTagCompound match {
             case null => false
             case tag if tag.hasKey(listName, Constants.NBT.TAG_LIST) => {

@@ -10,6 +10,8 @@ import net.minecraft.world.WorldSettings.GameType
 import cpw.mods.fml.relauncher.Side
 import java.lang.reflect.Field
 import cpw.mods.fml.relauncher.ReflectionHelper
+import net.minecraft.block.Block
+import de.ljfa.advbackport.Config
 
 object PlayerLogic {
     def getGameType(player: EntityPlayer): GameType = {
@@ -19,6 +21,15 @@ object PlayerLogic {
         }
     }
     
+    def canDestroy(player: EntityPlayer, block: Block): Boolean = {
+        if(Config.alwaysBreakable contains block)
+            true
+        else {
+            val tool = player.getCurrentEquippedItem
+            tool != null && ItemLogic.canDestroy(tool, block)
+        }
+    }
+    
     @SideOnly(Side.CLIENT)
-    lazy val gameTypeField: Field = ReflectionHelper.findField(classOf[PlayerControllerMP], "field_78779_k", "currentGameType")
+    private lazy val gameTypeField: Field = ReflectionHelper.findField(classOf[PlayerControllerMP], "field_78779_k", "currentGameType")
 }
